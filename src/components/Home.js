@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AccountBalance from './AccountBalance'
 
 export default class Home extends Component {
     render() {
@@ -6,6 +7,7 @@ export default class Home extends Component {
             <div>
                 <img src="https://letstalkpayments.com/wp-content/uploads/2016/04/Bank.png" alt="bank"/>
                 <h1>Bank of React</h1>
+                <AccountBalance accountBalance={this.props.accountBalance}/>
             </div>
         )
     }
