@@ -21,7 +21,7 @@ export default class App extends Component {
       debits: [],
       credits: [],
       currentUser: {
-        userName: "bob_loblaw",
+        userName: "janeDoe",
         memberSince: "08/23/99"
       }
     }
@@ -76,7 +76,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // If debit list changes, update totals accordingly
+    // If debit list changes, update debit total accordingly
     if (prevState.debits !== this.state.debits) {
       let debitTotal = 0;
       for (let transaction of this.state.debits) {
@@ -88,7 +88,7 @@ export default class App extends Component {
       });
     }
 
-    // If credit list changes, update totals accordingly
+    // If credit list changes, update credit total accordingly
     if (prevState.credits !== this.state.credits) {
       let creditTotal = 0;
       for (let transaction of this.state.credits) {
@@ -97,6 +97,19 @@ export default class App extends Component {
 
       this.setState({
         creditAmount: creditTotal.toFixed(2)
+      });
+    }
+
+    // If debit or credit lists change, update account balance accordingly
+    if (
+      prevState.debitAmount !== this.state.debitAmount ||
+      prevState.creditAmount !== this.state.creditAmount
+    ) {
+      let accountTotal = (
+        this.state.creditAmount - this.state.debitAmount
+      );
+      this.setState({
+        accountBalance: accountTotal.toFixed(2)
       });
     }
   }
@@ -160,6 +173,7 @@ export default class App extends Component {
     return (
       <>
         <NavigationBar/>
+
         <Router>
         <Switch>
           <Route exact path = "/" render={HomeComponent}/>
