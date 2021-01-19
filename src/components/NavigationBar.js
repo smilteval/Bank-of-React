@@ -9,11 +9,13 @@ export default class NavigationBar extends Component {
                 <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/">Bank of React</Navbar.Brand>
                     <Nav className="mr-auto">
-                    <Nav.Link href="/userProfile">User Profile</Nav.Link>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/debit">Debit</Nav.Link>
-                    <Nav.Link href="/credit">Credit</Nav.Link>
-                </Nav>
+                        <Nav.Link href="/userProfile">User Profile</Nav.Link>
+                        <Nav.Link href="/debit">Debit</Nav.Link>
+                        <Nav.Link href="/credit">Credit</Nav.Link>
+                    </Nav>
+                    <Nav className="ml-auto" id="login-btn">
+                        <Nav.Link href="/login">Login</Nav.Link>
+                    </Nav>
             </Navbar>
             </div>
         )
