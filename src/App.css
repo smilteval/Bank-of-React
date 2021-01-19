@@ -1,0 +1,31 @@
+#homepage{
+    display: flex;
+    width: 100%;
+}
+
+#bank-img{
+    height: 93vh;
+    border-right: 5px solid #343a40;
+}
+
+#homepage-text{
+    width:100%;
+    margin:auto;
+    margin-left: 10%;
+    font-family: monospace;
+}
+
+#home-title{
+    font-size: 70px;
+}
+
+#home-balance{
+    background-color: #343a40;
+    color:white;
+    width: 40%;
+    border-radius: 20px;
+    padding: 10px 0 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 30px;
+}
