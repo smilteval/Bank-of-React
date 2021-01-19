@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Redirect} from "react-router-dom"
 import {Link} from "react-router-dom"
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 export default class LogIn extends Component {
 
@@ -37,19 +39,33 @@ export default class LogIn extends Component {
         }
 
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="userName">User Name</label>
-                        <input type="text" name="userName" onChange={this.handleChange} value={this.state.user.userName} />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" />
-                    </div>
-                    <button>Log In</button>
-                </form>
-                <Link to ="/">Go Back</Link>
+            <div id="login-page">
+                <div id="login-form">
+                    <h1 id="login-title">Login</h1>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Group>
+                            <Form.Label className="form-labels">Username</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter username" 
+                                onChange={this.handleChange}
+                                // value={this.state.user.userName}
+                            />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label className="form-labels">Password</Form.Label>
+                            <Form.Control 
+                                type="password" 
+                                placeholder="Password" 
+                            />
+                        </Form.Group>
+                        
+                        <Button variant="dark" type="submit">
+                            Log In
+                        </Button>
+                    </Form>
+                </div>
             </div>
         )
     }

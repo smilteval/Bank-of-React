@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav'
 export default class NavigationBar extends Component {
     render() {
         return (
-            <div>
+            <div id="navigation-bar">
                 <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/">Bank of React</Navbar.Brand>
                     <Nav className="mr-auto">

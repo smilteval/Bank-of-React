@@ -4,7 +4,7 @@
 }
 
 #bank-img{
-    height: 93vh;
+    height: 92.7vh;
     border-right: 5px solid #343a40;
 }
 
@@ -16,6 +16,7 @@
 }
 
 #home-title{
+    color:#343a40; 
     font-size: 70px;
 }
 
@@ -34,4 +35,38 @@
     width: 100px;
     background-color: #565b5f;
     border-radius: 10px;
+    justify-content: center;
+}
+
+#login-page{
+    background: url(https://images.pexels.com/photos/1429770/pexels-photo-1429770.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+    height: 92.7vh;
+    color:#343a40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navigation-bar{
+    border-bottom: 2px solid white;
+}
+
+#login-form{
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 40%;
+    border-radius: 20px;
+    padding: 60px 80px;
+    box-shadow: 5px 5px 15px #565b5f;
+}
+
+#login-title{
+    font-family: monospace;
+    font-size: 50px;
+    padding-bottom: 20px;
+}
+
+.form-labels{
+    font-size: 20px;
+    font-family: monospace;
 }
