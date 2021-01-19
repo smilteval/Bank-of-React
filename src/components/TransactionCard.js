@@ -5,7 +5,7 @@ export default class TransactionCard extends Component {
         return (
             <div id="transaction-card">
                 <div>Description: {this.props.description}</div>
-                <div>Amount: ${this.props.amount}</div>
+                <div>Amount: ${this.props.amount.toFixed(2)}</div>
                 <div>Date: {this.props.date}</div>
             </div>
         )

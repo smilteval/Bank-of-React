@@ -81,6 +81,12 @@ export default class App extends Component {
     this.setState({currentUser: newUser})
   }
 
+  addDebit = (debit) => {
+    debit.date = new Date().toISOString();
+    const newDebits = [debit, ...this.state.debits];
+    this.setState({ debits: newDebits });
+  };
+
   render() {
     const HomeComponent = () => (
       <Home accountBalance={this.state.accountBalance}/>
@@ -106,6 +112,7 @@ export default class App extends Component {
         accountBalance={this.state.accountBalance}
         debits={this.state.debits}
         debitAmount={this.state.debitAmount}
+        addDebit={this.addDebit}
       />
     );
 

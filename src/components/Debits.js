@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Link} from "react-router-dom"
 import AccountBalance from './AccountBalance';
 import TransactionCard from './TransactionCard';
+import Button from "react-bootstrap/Button"
 
 export default class Debits extends Component {
 
@@ -17,6 +17,23 @@ export default class Debits extends Component {
         }
     }
 
+    handleChange = (event) => {
+        const updatedDebit = { ...this.state.debit };
+        const inputField = event.target.name;
+        const inputValue = event.target.value;
+    
+        updatedDebit[inputField] = inputValue;
+        if (inputField === "amount") {
+            updatedDebit.amount = Number(inputValue);
+        }
+        this.setState({ debit: updatedDebit });
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.addDebit(this.state.debit);
+    };
+
     render() {
         return (
             <div id="debit-page">
@@ -26,6 +43,29 @@ export default class Debits extends Component {
                     <AccountBalance accountBalance={this.props.accountBalance}/>
                 </div>
                 <div>Debit Amount: ${this.props.debitAmount}</div>
+
+                <div id="add-debit">
+                    <form onSubmit={this.handleSubmit}>
+                        <input
+                            name="description"
+                            type="text"
+                            value={this.state.debit.description}
+                            onChange={this.handleChange}
+                            placeholder="Enter description"
+                            required
+                        />
+                        <input
+                            name="amount"
+                            type="number"
+                            value={this.state.debit.amount}
+                            onChange={this.handleChange}
+                            placeholder="Enter amount"
+                            required
+                        />
+                        <Button type="submit">Add</Button>
+
+                    </form>
+                </div>
 
                 <div id="debit-history">
                     <h3>Debit History</h3>
