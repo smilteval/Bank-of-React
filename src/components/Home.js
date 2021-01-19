@@ -13,7 +13,9 @@ export default class Home extends Component {
                 />
                 <div id="homepage-text">
                     <h1 id="home-title">Bank of React</h1>
-                    <AccountBalance accountBalance={this.props.accountBalance}/>
+                    <div id="home-account-balance">
+                        <AccountBalance accountBalance={this.props.accountBalance}/>
+                    </div>
                 </div>
             </div>
         )
