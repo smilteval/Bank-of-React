@@ -15,12 +15,64 @@ export default class App extends Component {
     super();
 
     this.state = {
-      accountBalance: 14568.27,
+      accountBalance: 0,
+      debitAmount: 0,
+      creditAmount: 0,
+      debits: [],
+      credits: [],
       currentUser: {
         userName: "bob_loblaw",
         memberSince: "08/23/99"
       }
     }
+  }
+
+  componentDidMount(){
+
+    // Getting debits data from an api
+    const getDebits = async () => {
+      try{
+        let response = await fetch ("https://moj-api.herokuapp.com/debits");
+
+        if(!response.ok){
+          throw new Error("Something went wrong");
+        }
+
+        let data = await response.json();
+        
+        this.setState({
+          debits: data
+        })
+      }
+
+      catch (error){
+        console.log("error", error);
+      }
+    }
+
+    // Getting credits data from an api
+    const getCredits = async () => {
+      try{
+        let response = await fetch ("https://moj-api.herokuapp.com/credits");
+
+        if(!response.ok){
+          throw new Error("Something went wrong");
+        }
+
+        let data = await response.json();
+        
+        this.setState({
+          credits: data
+        })
+      }
+
+      catch (error){
+        console.log("error", error);
+      }
+    }
+
+    getDebits();
+    getCredits();
   }
 
   mockLogIn = (loginInfo) => {
@@ -30,12 +82,40 @@ export default class App extends Component {
   }
 
   render() {
+    const HomeComponent = () => (
+      <Home accountBalance={this.state.accountBalance}/>
+    );
 
-    const HomeComponent = () => (<Home accountBalance={this.state.accountBalance}/>);
-    const UserProfileComponent = () => (<UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}/>)
-    const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} {...this.props}/>)
-    const DebitComponent = () => (<Debits/>);
-    const CreditComponent = () => (<Credits/>);
+    const UserProfileComponent = () => (
+      <UserProfile 
+        userName={this.state.currentUser.userName} 
+        memberSince={this.state.currentUser.memberSince}
+      />
+    )
+
+    const LogInComponent = () => (
+      <LogIn 
+        user={this.state.currentUser} 
+        mockLogIn={this.mockLogIn} 
+        {...this.props}
+      />
+    )
+
+    const DebitComponent = () => (
+      <Debits
+        accountBalance={this.state.accountBalance}
+        debits={this.state.debits}
+        debitAmount={this.state.debitAmount}
+      />
+    );
+
+    const CreditComponent = () => (
+      <Credits
+        accountBalance={this.state.accountBalance}
+        credits={this.state.credits}
+        creditAmount={this.state.creditAmount}
+      />
+    );
 
     return (
       <>
