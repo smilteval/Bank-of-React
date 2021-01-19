@@ -87,6 +87,18 @@ export default class App extends Component {
         debitAmount: debitTotal.toFixed(2)
       });
     }
+
+    // If credit list changes, update totals accordingly
+    if (prevState.credits !== this.state.credits) {
+      let creditTotal = 0;
+      for (let transaction of this.state.credits) {
+        creditTotal += transaction.amount;
+      }
+
+      this.setState({
+        creditAmount: creditTotal.toFixed(2)
+      });
+    }
   }
 
   mockLogIn = (loginInfo) => {
@@ -99,6 +111,12 @@ export default class App extends Component {
     debit.date = new Date().toISOString();
     const newDebits = [debit, ...this.state.debits];
     this.setState({ debits: newDebits });
+  };
+
+  addCredit = (credit) => {
+    credit.date = new Date().toISOString();
+    const newCredits = [credit, ...this.state.credits];
+    this.setState({ credits: newCredits });
   };
 
   render() {
@@ -135,6 +153,7 @@ export default class App extends Component {
         accountBalance={this.state.accountBalance}
         credits={this.state.credits}
         creditAmount={this.state.creditAmount}
+        addCredit={this.addCredit}
       />
     );
 
