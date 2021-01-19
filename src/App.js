@@ -75,6 +75,20 @@ export default class App extends Component {
     getCredits();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // If debit list changes, update totals accordingly
+    if (prevState.debits !== this.state.debits) {
+      let debitTotal = 0;
+      for (let transaction of this.state.debits) {
+        debitTotal += transaction.amount;
+      }
+
+      this.setState({
+        debitAmount: debitTotal.toFixed(2)
+      });
+    }
+  }
+
   mockLogIn = (loginInfo) => {
     const newUser = {...this.state.currentUser}
     newUser.userName = loginInfo.userName
