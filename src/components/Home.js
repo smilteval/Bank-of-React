@@ -7,7 +7,7 @@ export default class Home extends Component {
         return (
             <div id="homepage">
                 <img 
-                    id="bank-img" 
+                    id="home-img" 
                     src="https://images.unsplash.com/photo-1518713408716-82d62758922f?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=687&q=80" 
                     alt="bank"
                 />

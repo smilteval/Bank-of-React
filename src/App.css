@@ -1,9 +1,24 @@
+/* NAVBAR */
+
+#navigation-bar{
+    border-bottom: 2px solid white;
+}
+
+#login-btn{
+    width: 100px;
+    background-color: #565b5f;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+/* HOMEPAGE */
+
 #homepage{
     display: flex;
     width: 100%;
 }
 
-#bank-img{
+#home-img{
     height: 92.7vh;
     border-right: 5px solid #343a40;
 }
@@ -31,12 +46,7 @@
     margin-top: 30px;
 }
 
-#login-btn{
-    width: 100px;
-    background-color: #565b5f;
-    border-radius: 10px;
-    justify-content: center;
-}
+/* LOGIN PAGE */
 
 #login-page{
     background: url(https://images.pexels.com/photos/1429770/pexels-photo-1429770.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
@@ -46,10 +56,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#navigation-bar{
-    border-bottom: 2px solid white;
 }
 
 #login-form{
@@ -69,4 +75,40 @@
 .form-labels{
     font-size: 20px;
     font-family: monospace;
+}
+
+/* USER PROFILE PAGE */
+
+#profile-page{
+    display: flex;
+    width: 100%;
+}
+
+#profile-text{
+    width:100%;
+    margin:auto;
+    margin-left: 10%;
+    font-family: monospace;
+}
+
+#profile-img{
+    height: 92.7vh;
+    border-left: 5px solid #343a40;
+}
+
+#profile-title{
+    color:#343a40; 
+    font-size: 50px;
+}
+
+#user-info{
+    font-size: 20px;
+}
+
+#debit-btn{
+    margin: 20px 0;
+}
+
+#credit-btn{
+    margin-left: 20px;
 }
