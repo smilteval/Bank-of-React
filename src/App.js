@@ -4,6 +4,10 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Home from "./components/Home"
 import UserProfile from "./components/UserProfile"
 import LogIn from "./components/LogIn"
+import Debits from "./components/Debits"
+import Credits from "./components/Credits"
+import NavigationBar from './components/NavigationBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class App extends Component {
 
@@ -30,17 +34,22 @@ export default class App extends Component {
     const HomeComponent = () => (<Home accountBalance={this.state.accountBalance}/>);
     const UserProfileComponent = () => (<UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}/>)
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} {...this.props}/>)
+    const DebitComponent = () => (<Debits/>);
+    const CreditComponent = () => (<Credits/>);
 
     return (
-      <Router>
-      <Switch>
-        <Route exact path = "/" render={HomeComponent}/>
-        <Route exact path = "/userProfile" render={UserProfileComponent}/>
-        <Route exact path = "/login" render ={LogInComponent}/>
-        <Route exact path = "/debit"/>
-        <Route exact path = "/credit"/>
-      </Switch>
-    </Router>
+      <>
+        <NavigationBar/>
+        <Router>
+        <Switch>
+          <Route exact path = "/" render={HomeComponent}/>
+          <Route exact path = "/userProfile" render={UserProfileComponent}/>
+          <Route exact path = "/login" render={LogInComponent}/>
+          <Route exact path = "/debit" render={DebitComponent}/>
+          <Route exact path = "/credit" render={CreditComponent}/>
+        </Switch>
+      </Router>
+    </>
     )
   }
 }
