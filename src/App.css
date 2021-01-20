@@ -120,7 +120,7 @@
 }
 
 #debit-page, #credit-page{
-    height: 100vh;
+    height: 100%;
     width: 60%;
     background-color: rgba(255,255,255);
     margin:auto;
