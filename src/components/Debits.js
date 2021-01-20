@@ -38,47 +38,55 @@ export default class Debits extends Component {
 
     render() {
         return (
-            <div id="debit-page">
-                <h1 id="debits-title">Debits</h1>
-                <div id="debits-account-balance">
-                    <AccountBalance accountBalance={this.props.accountBalance}/>
-                </div>
-                <div>Debit total: ${this.props.debitTotal}</div>
+            <div id="debit-background">
+                <div id="debit-page">
+                    <h1 id="debits-title">Debits</h1>
+                    <div id="debits-account-balance">
+                        <AccountBalance accountBalance={this.props.accountBalance}/>
+                        Debit total: ${this.props.debitTotal}
+                    </div>
 
-                <div id="add-debit">
-                    <form onSubmit={this.handleSubmit}>
-                        <input
-                            name="description"
-                            type="text"
-                            value={this.state.debit.description}
-                            onChange={this.handleChange}
-                            placeholder="Enter description"
-                            required
-                        />
-                        <input
-                            name="amount"
-                            type="number"
-                            value={this.state.debit.amount}
-                            onChange={this.handleChange}
-                            placeholder="Enter amount"
-                            required
-                        />
-                        <Button type="submit">Add</Button>
-                    </form>
-                </div>
-
-                <div id="debit-history">
-                    <h3>Debit History</h3>
-                    {this.props.debits.map((transaction)=>{
-                        let date = new Date(transaction.date)
-                        return(
-                            <TransactionCard
-                                description = {transaction.description}
-                                amount={transaction.amount}
-                                date={date.toLocaleDateString("en-US")}
+                    <div id="add-debit">
+                        <h3>Add a transaction</h3>
+                        <form onSubmit={this.handleSubmit}>
+                            <input
+                                name="description"
+                                type="text"
+                                value={this.state.debit.description}
+                                onChange={this.handleChange}
+                                placeholder="Enter description"
+                                required
                             />
-                        )
-                    })}
+                            <input
+                                name="amount"
+                                type="number"
+                                value={this.state.debit.amount}
+                                onChange={this.handleChange}
+                                placeholder="Enter amount"
+                                required
+                            />
+                            <Button id="add-btn" type="submit" variant="outline-secondary">Add</Button>
+                        </form>
+                    </div>
+
+                    <div id="debit-history">
+                        <h3>Debit History</h3>
+                        <div id="history-table-header">
+                            <div id="date">Date</div>
+                            <div id="description">Description</div>
+                            <div id="amount">Amount</div>
+                        </div>
+                        {this.props.debits.map((transaction)=>{
+                            let date = new Date(transaction.date)
+                            return(
+                                <TransactionCard
+                                    description = {transaction.description}
+                                    amount={transaction.amount}
+                                    date={date.toLocaleDateString("en-US")}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         )
