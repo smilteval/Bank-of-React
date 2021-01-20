@@ -24,6 +24,9 @@ export default class Credits extends Component {
         if (inputField === "amount") {
             updatedCredit.amount = Number(inputValue);
         }
+
+        updatedCredit.date = new Date().toLocaleDateString("en-US");
+
         this.setState({ credit: updatedCredit });
     };
 
@@ -35,7 +38,6 @@ export default class Credits extends Component {
     render() {
         return (
             <div id="credit-page">
-                
                 <h1 id="credits-title">Credits</h1>
                 <div id="credits-account-balance">
                     <AccountBalance accountBalance={this.props.accountBalance}/>
@@ -62,23 +64,22 @@ export default class Credits extends Component {
                             required
                         />
                         <Button type="submit">Add</Button>
-
                     </form>
                 </div>
 
                 <div id="debit-history">
                     <h3>Credit History</h3>
                     {this.props.credits.map((transaction)=>{
+                        let date = new Date(transaction.date)
                         return(
                             <TransactionCard
                                 description = {transaction.description}
                                 amount={transaction.amount}
-                                date={transaction.date}
+                                date={date.toLocaleDateString("en-US")}
                             />
                         )
                     })}
                 </div>
-
             </div>
         )
     }

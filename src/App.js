@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import axios from "axios";
 import Home from "./components/Home"
 import UserProfile from "./components/UserProfile"
 import LogIn from "./components/LogIn"
@@ -32,72 +33,58 @@ export default class App extends Component {
     let creditTotal = 0;
 
     // Getting debit data from an api
-    const getDebits = async () => {
 
-      let response = await fetch ("https://moj-api.herokuapp.com/debits");
-      let debits = await response.json();
-      
-      debits.forEach(transaction => {
-        debitTotal += transaction.amount;
+    axios
+      .get("https://moj-api.herokuapp.com/debits")
+      .then(response=>{
+        let debits = response.data;
+
+        debits.forEach(transaction => {
+          debitTotal += transaction.amount;
+        })
+
+        this.setState({ 
+          debits,
+          debitTotal
+        })
       })
-
-      this.setState({ debits, debitTotal })
-    }
+      .catch(error=>{
+        console.log(error);
+      })
   
-    // Getting credits data from an api
-    const getCredits = async () => {
+    axios
+      .get("https://moj-api.herokuapp.com/credits")
+      .then(response=>{
+        let credits = response.data;
 
-      let response = await fetch ("https://moj-api.herokuapp.com/credits");
-      let credits = await response.json();
-      
-      credits.forEach(transaction => {
-        creditTotal += transaction.amount;
+        credits.forEach(transaction => {
+          creditTotal += transaction.amount;
+        })
+
+        this.setState({ 
+          credits, 
+          creditTotal
+        })
       })
-
-      this.setState({ credits, creditTotal })
-    }
-
-    getDebits();
-    getCredits();
+      .catch(error=>{
+        console.log(error);
+      })
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // If debit list changes, update debit total accordingly
-    if (prevState.debits !== this.state.debits) {
+  addDebit = (newDebit) =>{
+    let updatedDebits = [newDebit, ...this.state.debits];
+    this.setState({
+      debits: updatedDebits,
+      debitTotal: this.state.debitTotal + Number(newDebit.amount)
+    })
+  }
 
-      let debitTotal = 0;
-      
-      this.state.debits.forEach(transaction => {
-        debitTotal += transaction.amount;
-      })
-
-      debitTotal = debitTotal.toFixed(2);
-
-      this.setState({debitTotal});
-    }
-
-    // If credit list changes, update credit total accordingly
-    if (prevState.credits !== this.state.credits) {
-
-      let creditTotal = 0;
-
-      this.state.credits.forEach(transaction => {
-        creditTotal += transaction.amount;
-      })
-
-      creditTotal = creditTotal.toFixed(2);
-
-      this.setState({creditTotal});
-    }
-
-    // If debit or credit lists change, update account balance accordingly
-    if (prevState.debitTotal !== this.state.debitTotal 
-      || prevState.creditTotal !== this.state.creditTotal) {
-
-      let accountBalance = (this.state.creditTotal - this.state.debitTotal).toFixed(2);
-
-      this.setState({accountBalance});
-    }
+  addCredit = (newCredit) =>{
+    let updatedCredits = [newCredit, ...this.state.debits];
+    this.setState({
+      credits: updatedCredits,
+      creditTotal: this.state.creditTotal + Number(newCredit.amount)
+    })
   }
 
   mockLogIn = (loginInfo) => {
@@ -106,21 +93,12 @@ export default class App extends Component {
     this.setState({currentUser: newUser});
   }
 
-  addDebit = (debit) => {
-    debit.date = new Date().toISOString();
-    const newDebits = [debit, ...this.state.debits];
-    this.setState({ debits: newDebits });
-  };
-
-  addCredit = (credit) => {
-    credit.date = new Date().toISOString();
-    const newCredits = [credit, ...this.state.credits];
-    this.setState({ credits: newCredits });
-  };
-
   render() {
+
+    let accountBalance = (this.state.creditTotal - this.state.debitTotal).toFixed(2);
+
     const HomeComponent = () => (
-      <Home accountBalance={this.state.accountBalance}/>
+      <Home accountBalance={accountBalance}/>
     );
 
     const UserProfileComponent = () => (
@@ -140,7 +118,7 @@ export default class App extends Component {
 
     const DebitComponent = () => (
       <Debits
-        accountBalance={this.state.accountBalance}
+        accountBalance={accountBalance}
         debits={this.state.debits}
         debitTotal={this.state.debitTotal}
         addDebit={this.addDebit}
@@ -149,13 +127,13 @@ export default class App extends Component {
 
     const CreditComponent = () => (
       <Credits
-        accountBalance={this.state.accountBalance}
+        accountBalance={accountBalance}
         credits={this.state.credits}
         creditTotal={this.state.creditTotal}
         addCredit={this.addCredit}
       />
     );
-    
+
     return (
       <>
         <NavigationBar/>

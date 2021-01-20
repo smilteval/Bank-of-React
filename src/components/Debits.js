@@ -25,6 +25,9 @@ export default class Debits extends Component {
         if (inputField === "amount") {
             updatedDebit.amount = Number(inputValue);
         }
+
+        updatedDebit.date = new Date().toLocaleDateString("en-US");
+
         this.setState({ debit: updatedDebit });
     };
 
@@ -36,7 +39,6 @@ export default class Debits extends Component {
     render() {
         return (
             <div id="debit-page">
-                
                 <h1 id="debits-title">Debits</h1>
                 <div id="debits-account-balance">
                     <AccountBalance accountBalance={this.props.accountBalance}/>
@@ -62,24 +64,22 @@ export default class Debits extends Component {
                             required
                         />
                         <Button type="submit">Add</Button>
-
                     </form>
-                    <Button href="/">Back To Home</Button>
                 </div>
 
                 <div id="debit-history">
                     <h3>Debit History</h3>
                     {this.props.debits.map((transaction)=>{
+                        let date = new Date(transaction.date)
                         return(
                             <TransactionCard
                                 description = {transaction.description}
                                 amount={transaction.amount}
-                                date={transaction.date}
+                                date={date.toLocaleDateString("en-US")}
                             />
                         )
                     })}
                 </div>
-
             </div>
         )
     }
