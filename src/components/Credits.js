@@ -68,7 +68,7 @@ export default class Credits extends Component {
                         </form>
                     </div>
 
-                    <div id="debit-history">
+                    <div id="credit-history">
                         <h3>Credit History</h3>
                         <div id="history-table-header">
                             <div id="date">Date</div>

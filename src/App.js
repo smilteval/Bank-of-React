@@ -80,7 +80,7 @@ export default class App extends Component {
   }
 
   addCredit = (newCredit) =>{
-    let updatedCredits = [newCredit, ...this.state.debits];
+    let updatedCredits = [newCredit, ...this.state.credits];
     this.setState({
       credits: updatedCredits,
       creditTotal: this.state.creditTotal + Number(newCredit.amount)
