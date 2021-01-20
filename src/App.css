@@ -108,12 +108,17 @@
     margin-left: 20px;
 }
 
-/* DEBIT PAGE */
+/* DEBIT/CREDIT PAGE */
 #debit-background{
-    background: url("https://images.pexels.com/photos/3531895/pexels-photo-3531895.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background: url("https://images.pexels.com/photos/4386155/pexels-photo-4386155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size:cover;
 }
 
-#debit-page{
+#credit-background{
+    background: url("https://images.pexels.com/photos/4386157/pexels-photo-4386157.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+}
+
+#debit-page, #credit-page{
     width: 60%;
     background-color: rgba(255,255,255);
     margin:auto;
@@ -123,25 +128,25 @@
     border-right: 5px solid #343a40;
 }
 
-#debits-title{
+#debits-title, #credits-title{
     text-align: center;
     font-size: 50px;
     padding-bottom: 20px;
 }
 
-#debits-account-balance{
+#debits-account-balance, #credits-account-balance{
     font-size: 20px;
     text-align: center;
 }
 
-#add-debit{
+#add-debit, #add-credit{
     margin: 30px 0;
     padding: 10px 30px;
     width: 70%;
     border-radius: 20px;
 }
 
-#add-debit input{
+#add-debit input, #add-credit input{
     padding: 5px;
     margin-right: 10px;
 }

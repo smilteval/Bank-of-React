@@ -37,48 +37,55 @@ export default class Credits extends Component {
 
     render() {
         return (
-            <div id="credit-page">
-                <h1 id="credits-title">Credits</h1>
-                <div id="credits-account-balance">
-                    <AccountBalance accountBalance={this.props.accountBalance}/>
-                </div>
-                <div>Credit Total: ${this.props.creditTotal}</div>
+            <div id="credit-background">
+                <div id="credit-page">
+                    <h1 id="credits-title">Credits</h1>
+                    <div id="credits-account-balance">
+                        <AccountBalance accountBalance={this.props.accountBalance}/>
+                        Credit Total: ${this.props.creditTotal}
+                    </div>
 
-                <div id="add-credit">
-                    <h3>Add a transaction</h3>
-                    <form onSubmit={this.handleSubmit}>
-                        <input
-                            name="description"
-                            type="text"
-                            value={this.state.credit.description}
-                            onChange={this.handleChange}
-                            placeholder="Enter description"
-                            required
-                        />
-                        <input
-                            name="amount"
-                            type="number"
-                            value={this.state.credit.amount}
-                            onChange={this.handleChange}
-                            placeholder="Enter amount"
-                            required
-                        />
-                        <Button type="submit">Add</Button>
-                    </form>
-                </div>
-
-                <div id="debit-history">
-                    <h3>Credit History</h3>
-                    {this.props.credits.map((transaction)=>{
-                        let date = new Date(transaction.date)
-                        return(
-                            <TransactionCard
-                                description = {transaction.description}
-                                amount={transaction.amount}
-                                date={date.toLocaleDateString("en-US")}
+                    <div id="add-credit">
+                        <h3>Add a transaction</h3>
+                        <form onSubmit={this.handleSubmit}>
+                            <input
+                                name="description"
+                                type="text"
+                                value={this.state.credit.description}
+                                onChange={this.handleChange}
+                                placeholder="Enter description"
+                                required
                             />
-                        )
-                    })}
+                            <input
+                                name="amount"
+                                type="number"
+                                value={this.state.credit.amount}
+                                onChange={this.handleChange}
+                                placeholder="Enter amount"
+                                required
+                            />
+                            <Button id="add-btn" type="submit" variant="outline-secondary">Add</Button>
+                        </form>
+                    </div>
+
+                    <div id="debit-history">
+                        <h3>Credit History</h3>
+                        <div id="history-table-header">
+                            <div id="date">Date</div>
+                            <div id="description">Description</div>
+                            <div id="amount">Amount</div>
+                        </div>
+                        {this.props.credits.map((transaction)=>{
+                            let date = new Date(transaction.date)
+                            return(
+                                <TransactionCard
+                                    description = {transaction.description}
+                                    amount={transaction.amount}
+                                    date={date.toLocaleDateString("en-US")}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         )
