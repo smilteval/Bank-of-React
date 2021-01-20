@@ -6,7 +6,7 @@ export default class NavigationBar extends Component {
     render() {
         return (
             <div id="navigation-bar">
-                <Navbar bg="dark" variant="dark">
+                <Navbar fixed="top" bg="dark" variant="dark">
                     <Navbar.Brand href="/">Bank of React</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/userProfile">User Profile</Nav.Link>

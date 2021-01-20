@@ -15,7 +15,7 @@
 }
 
 #home-img{
-    height: 92.7vh;
+    height: 100vh;
     border-right: 5px solid #343a40;
 }
 
@@ -47,7 +47,7 @@
 #login-page{
     background: url(https://images.pexels.com/photos/1429770/pexels-photo-1429770.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
     background-size: cover;
-    height: 92.7vh;
+    height: 100vh;
     color:#343a40;
     display: flex;
     justify-content: center;
@@ -87,7 +87,7 @@
 }
 
 #profile-img{
-    height: 92.7vh;
+    height: 100vh;
     border-left: 5px solid #343a40;
 }
 
@@ -116,12 +116,15 @@
 
 #credit-background{
     background: url("https://images.pexels.com/photos/4386157/pexels-photo-4386157.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size:cover;
 }
 
 #debit-page, #credit-page{
+    height: 100vh;
     width: 60%;
     background-color: rgba(255,255,255);
     margin:auto;
+    margin-top: 48px;
     padding: 20px;
     font-family: monospace;
     border-left: 5px solid #343a40;
@@ -131,7 +134,7 @@
 #debits-title, #credits-title{
     text-align: center;
     font-size: 50px;
-    padding-bottom: 20px;
+    padding: 20px;
 }
 
 #debits-account-balance, #credits-account-balance{
