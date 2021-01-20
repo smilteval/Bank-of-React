@@ -9,7 +9,6 @@ export default class Debits extends Component {
         super(props);
         this.state={
             debit: {
-                id: "",
                 description: "",
                 amount: "",
                 date: ""
@@ -42,7 +41,7 @@ export default class Debits extends Component {
                 <div id="debits-account-balance">
                     <AccountBalance accountBalance={this.props.accountBalance}/>
                 </div>
-                <div>Debit Amount: ${this.props.debitAmount}</div>
+                <div>Debit total: ${this.props.debitTotal}</div>
 
                 <div id="add-debit">
                     <form onSubmit={this.handleSubmit}>
@@ -65,6 +64,7 @@ export default class Debits extends Component {
                         <Button type="submit">Add</Button>
 
                     </form>
+                    <Button href="/">Back To Home</Button>
                 </div>
 
                 <div id="debit-history">

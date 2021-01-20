@@ -8,7 +8,6 @@ export default class Credits extends Component {
         super(props);
         this.state={
             credit: {
-                id: "",
                 description: "",
                 amount: "",
                 date: ""
@@ -41,9 +40,10 @@ export default class Credits extends Component {
                 <div id="credits-account-balance">
                     <AccountBalance accountBalance={this.props.accountBalance}/>
                 </div>
-                <div>Credit Amount: ${this.props.creditAmount}</div>
+                <div>Credit Total: ${this.props.creditTotal}</div>
 
                 <div id="add-credit">
+                    <h3>Add a transaction</h3>
                     <form onSubmit={this.handleSubmit}>
                         <input
                             name="description"

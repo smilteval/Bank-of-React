@@ -16,8 +16,8 @@ export default class App extends Component {
 
     this.state = {
       accountBalance: 0,
-      debitAmount: 0,
-      creditAmount: 0,
+      debitTotal: 0,
+      creditTotal: 0,
       debits: [],
       credits: [],
       currentUser: {
@@ -28,47 +28,33 @@ export default class App extends Component {
   }
 
   componentDidMount(){
+    let debitTotal = 0;
+    let creditTotal = 0;
 
-    // Getting debits data from an api
+    // Getting debit data from an api
     const getDebits = async () => {
-      try{
-        let response = await fetch ("https://moj-api.herokuapp.com/debits");
 
-        if(!response.ok){
-          throw new Error("Something went wrong");
-        }
+      let response = await fetch ("https://moj-api.herokuapp.com/debits");
+      let debits = await response.json();
+      
+      debits.forEach(transaction => {
+        debitTotal += transaction.amount;
+      })
 
-        let data = await response.json();
-        
-        this.setState({
-          debits: data
-        })
-      }
-
-      catch (error){
-        console.log("error", error);
-      }
+      this.setState({ debits, debitTotal })
     }
-
+  
     // Getting credits data from an api
     const getCredits = async () => {
-      try{
-        let response = await fetch ("https://moj-api.herokuapp.com/credits");
 
-        if(!response.ok){
-          throw new Error("Something went wrong");
-        }
+      let response = await fetch ("https://moj-api.herokuapp.com/credits");
+      let credits = await response.json();
+      
+      credits.forEach(transaction => {
+        creditTotal += transaction.amount;
+      })
 
-        let data = await response.json();
-        
-        this.setState({
-          credits: data
-        })
-      }
-
-      catch (error){
-        console.log("error", error);
-      }
+      this.setState({ credits, creditTotal })
     }
 
     getDebits();
@@ -78,46 +64,46 @@ export default class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     // If debit list changes, update debit total accordingly
     if (prevState.debits !== this.state.debits) {
-      let debitTotal = 0;
-      for (let transaction of this.state.debits) {
-        debitTotal += transaction.amount;
-      }
 
-      this.setState({
-        debitAmount: debitTotal.toFixed(2)
-      });
+      let debitTotal = 0;
+      
+      this.state.debits.forEach(transaction => {
+        debitTotal += transaction.amount;
+      })
+
+      debitTotal = debitTotal.toFixed(2);
+
+      this.setState({debitTotal});
     }
 
     // If credit list changes, update credit total accordingly
     if (prevState.credits !== this.state.credits) {
-      let creditTotal = 0;
-      for (let transaction of this.state.credits) {
-        creditTotal += transaction.amount;
-      }
 
-      this.setState({
-        creditAmount: creditTotal.toFixed(2)
-      });
+      let creditTotal = 0;
+
+      this.state.credits.forEach(transaction => {
+        creditTotal += transaction.amount;
+      })
+
+      creditTotal = creditTotal.toFixed(2);
+
+      this.setState({creditTotal});
     }
 
     // If debit or credit lists change, update account balance accordingly
-    if (
-      prevState.debitAmount !== this.state.debitAmount ||
-      prevState.creditAmount !== this.state.creditAmount
-    ) {
-      let accountTotal = (
-        this.state.creditAmount - this.state.debitAmount
-      );
-      this.setState({
-        accountBalance: accountTotal.toFixed(2)
-      });
+    if (prevState.debitTotal !== this.state.debitTotal 
+      || prevState.creditTotal !== this.state.creditTotal) {
+
+      let accountBalance = (this.state.creditTotal - this.state.debitTotal).toFixed(2);
+
+      this.setState({accountBalance});
     }
   }
 
   mockLogIn = (loginInfo) => {
-    const newUser = {...this.state.currentUser}
-    newUser.userName = loginInfo.userName
-    this.setState({currentUser: newUser})
+    const newUser = {...this.state.currentUser};
+    newUser.userName = loginInfo.userName;
+    this.setState({currentUser: newUser});
   }
 
   addDebit = (debit) => {
@@ -156,7 +142,7 @@ export default class App extends Component {
       <Debits
         accountBalance={this.state.accountBalance}
         debits={this.state.debits}
-        debitAmount={this.state.debitAmount}
+        debitTotal={this.state.debitTotal}
         addDebit={this.addDebit}
       />
     );
@@ -165,11 +151,11 @@ export default class App extends Component {
       <Credits
         accountBalance={this.state.accountBalance}
         credits={this.state.credits}
-        creditAmount={this.state.creditAmount}
+        creditTotal={this.state.creditTotal}
         addCredit={this.addCredit}
       />
     );
-
+    
     return (
       <>
         <NavigationBar/>

@@ -14,17 +14,17 @@ export default class LogIn extends Component {
         }
     }
 
-    handleChange = (e) => {
+    handleChange = (event) => {
         const updatedUser = {...this.state.user}
-        const inputField = e.target.name
-        const inputValue = e.target.value
+        const inputField = event.target.name
+        const inputValue = event.target.value
         updatedUser[inputField] = inputValue
     
         this.setState({user: updatedUser})
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
+    handleSubmit = (event) => {
+        event.preventDefault()
         this.props.mockLogIn(this.state.user)
         this.setState({redirect: true})
     }
